@@ -1,0 +1,282 @@
+body {
+  background-color: #eee;
+}
+.title {
+  margin-bottom: 50px;
+  text-transform: uppercase;
+}
+
+.card-block {
+  font-size: 1em;
+  position: relative;
+  margin: 0;
+  padding: 1em;
+  border: none;
+  border-top: 1px solid rgba(34, 36, 38, 0.1);
+  box-shadow: none;
+}
+.phone-canvas {
+ 
+
+  &__inner {
+    //border: 1px dashed #ddd;
+    position: relative;
+    border-radius: 32px;
+    height: 506px;
+    margin: 0 auto;
+    width: 258px;
+  }
+}
+.background-option {
+  background-color: #eceff1;
+  background-size: 100% 100%;
+  border: 1px solid #eceff1;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 12px;
+  height: 4rem;
+  transform-origin: center;
+  width: 2.5rem;
+
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
+    transform 0.15s ease-in-out;
+
+  &:hover {
+    border-color: #b0bec5;
+    box-shadow: 0 2px 6px rgba(#212121, 0.3);
+    transform: scale(1.08);
+  }
+}
+.getcase-btn {
+  background-color: #00bcd4 !important;
+  border-color: #00bcd4 !important;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+.phone-case {
+  background-image: url(../assets/images/other/iphone-backgr.png);
+  background-position: center;
+  background-size: 100% 100%;
+  border-radius: 32px;
+  height: 504px;
+  pointer-events: none;
+  width: 258px;
+}
+
+
+.drop-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+
+  &__background {
+    background-color: transparent;
+    background-size: 100% 100%;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.9;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.phone-fore {
+  background-image: url(../assets/images/other/iphone-foregr.png);
+
+  background-position: center;
+  background-size: 100% 100%;
+  border-radius: 32px;
+  height: 504px;
+  left: 50%;
+  margin: 0 auto;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  width: 258px;
+}
+.card {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.royalblue {
+  color: #0dcaf0;
+  font-size: x-large;
+}
+.sticker-picker {
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  max-height: 30vh;
+  overflow: auto;
+}
+.color-option {
+  border: 1px solid #e0e0e0;
+  display: inline-block;
+  height: 26px;
+  width: 26px;
+  transition: transform 0.15s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1) translateY(-2px);
+  }
+}
+
+.drop-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 37px;
+  &__background {
+    background-color: transparent;
+    background-size: 100% 100%;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.9;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.selected {
+  background-color: #0dcaf0;
+  border-radius: 50%;
+  padding: 4px 6px;
+  .royalblue {
+    color: #fff !important;
+  }
+}
+.text-picker {
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  max-height: 30vh;
+  overflow: auto;
+}
+.text-item {
+  border: 2px dashed transparent;
+  border-radius: 8px;
+  cursor: grab;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: border 0.15s ease-in-out;
+  white-space: nowrap;
+
+  &:hover {
+    border: 2px dashed #e0e0e0;
+  }
+
+  &__text {
+    display: inline-block;
+    font-size: 24px;
+    max-width: 101%;
+    transition: color 0.15s ease-in-out, text-shadow 0.15s ease-in-out;
+  }
+}
+.label {
+  margin-bottom: 20px;
+}
+.text-input {
+  border-style: none;
+  border-bottom: 1px solid;
+  border-radius: 0px;
+}
+.sticker-item {
+  &__image {
+    border: 2px dashed transparent;
+    border-radius: 8px;
+    cursor: grab;
+   
+    transform-origin: 50% 50%;
+    transition: border 0.15s ease-in-out;
+
+    &:hover {
+      border: 2px dashed #e0e0e0;
+    }
+  }
+}
+
+::ng-deep.widget {
+  display: inline-block !important;
+  position: absolute;
+  transform-origin: 50% 50%;
+  z-index: 101;
+  border: 1px solid #eeaaaa;
+  box-sizing: content-box;
+  cursor: move;
+}
+.widget-container {
+  display: inline-block;
+  position: absolute;
+  transform-origin: 50% 50%;
+  z-index: 101;
+  cursor: pointer;
+}
+.t-btn {
+  background-color: #e0e0e0;
+  border: 1px solid #bdbdbd;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.75rem;
+  width: 1.75rem;
+  position: absolute;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    color 0.15s ease-in-out;
+  z-index: 101;
+
+  &:hover {
+    background-color: #2196f3;
+    border-color: #1e88e5;
+    color: #fafafa;
+  }
+
+  &--delete {
+    top: 3.75rem;
+    cursor: grab;
+    right: 4.75rem;
+    background: #f44336;
+    color: #fafafa;
+    border: #f44336;
+  }
+
+  &--flip-back {
+    border-radius: 50% 50% 0 0;
+    bottom: calc(50% - 1px);
+    left: 4.75rem;
+  }
+
+  &--flip-front {
+    border-radius: 0 0 50% 50%;
+    left: 4.75rem;
+    top: calc(50% - 1px);
+  }
+
+  &--rotate {
+    cursor: grab;
+    right: 4.75rem;
+    top: calc(50% - 11.75rem / 2);
+  }
+
+  &--scale {
+    bottom: 1.75rem;
+    cursor: grab;
+    right: 4.75rem;
+  }
+
+  i {
+    font-size: 18px;
+    pointer-events: none;
+    user-select: none;
+  }
+}
