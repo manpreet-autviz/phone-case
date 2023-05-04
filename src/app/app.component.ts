@@ -105,6 +105,8 @@ export class AppComponent {
   isEdit: boolean = false;
   private clickListener!: () => void;
   scaleObject: boolean = false;
+  copiedImage: HTMLImageElement | null = null;
+  copiedText: HTMLDivElement | null = null;
 
   constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
 
@@ -131,7 +133,7 @@ export class AppComponent {
   onDragStart(event: any, src: any, type: string): void {
     this.type = type;
     if (type === 'sticker') {
-      // event.dataTransfer.setData('text/plain', src);
+      event.dataTransfer.setData('text/plain', src);
       event.dataTransfer.setData('targetId', 'canvas');
     } else {
       this.style = src;
@@ -166,11 +168,10 @@ export class AppComponent {
         image.style.width = '64px';
         image.style.cursor = 'move';
         image.style.zIndex = '0';
-        image.setAttribute('draggable', 'true');
 
         this.images.push(image);
-        
-         image.addEventListener( 'click', () => {
+
+        image.addEventListener('click', () => {
           if (this.selectedDiv) {
             this.renderer.removeClass(this.selectedDiv, 'widget');
           }
@@ -181,7 +182,27 @@ export class AppComponent {
         });
 
         event.target.appendChild(image);
-        
+
+        image.addEventListener('dragstart', (event: DragEvent) => {
+          if (event.dataTransfer) {
+            this.isEdit = false;
+            const targetImage = event.target as HTMLImageElement;
+            event.dataTransfer.setData('text/plain', targetImage.src);
+            event.dataTransfer.setData('targetId', 'canvas');
+            // this.renderer.addClass(image, 'widget');
+          }
+        });
+        image.addEventListener('dragend', (event: DragEvent) => {
+          const targetImage = event.target as HTMLImageElement;
+          if (targetImage === this.copiedImage) {
+            console.log(targetImage);
+          } else {
+            targetImage.parentNode?.removeChild(targetImage);
+          }
+        });
+        if (targetId === 'canvas') {
+          this.copiedImage = image;
+        }
         this.imageIndex++;
       } else {
         const tempDiv = document.createElement('div');
@@ -194,6 +215,7 @@ export class AppComponent {
         tempDiv.style.color = this.textColor;
         tempDiv.style.top = event.offsetY + 'px';
         tempDiv.style.left = event.offsetX + 'px';
+        tempDiv.style.cursor = 'move';
         tempDiv.style.zIndex = '0';
 
         this.renderer.listen(tempDiv, 'click', () => {
@@ -205,13 +227,36 @@ export class AppComponent {
           this.selectedImage = tempDiv;
           this.addClassToIconsDiv();
         });
+
         event.target.appendChild(tempDiv);
+
+        tempDiv.setAttribute('draggable', 'true');
+        tempDiv.addEventListener('dragstart', (event: DragEvent) => {
+          if (event.dataTransfer) {
+            event.dataTransfer.setData(
+              'text/plain',
+              (event.target as HTMLElement).innerText
+            );
+
+            event.dataTransfer.setData('targetId', 'canvas');
+          }
+        });
+        tempDiv.addEventListener('dragend', (event: DragEvent) => {
+          const targetText = event.target as HTMLDivElement;
+          if (targetText === this.copiedText) {
+            console.log(targetText);
+          } else {
+            targetText.parentNode?.removeChild(targetText);
+          }
+        });
+        if (targetId === 'canvas') {
+          this.copiedText = tempDiv;
+        }
       }
     }
   }
-  addClassToIconsDiv() {
 
-    
+  addClassToIconsDiv() {
     const nativeElement = this.widgetIcons.nativeElement;
     nativeElement.classList.add('iconsDiv');
 
@@ -247,7 +292,7 @@ export class AppComponent {
       this.renderer.setStyle(testElement, 'transform', transform);
       this.renderer.setStyle(testElement, 'font-size', fontSize);
     }
-    
+
     this.isEdit = true;
   }
   toRad(angle: number) {
@@ -268,21 +313,29 @@ export class AppComponent {
       });
     }
   }
-  toggleIcon(){
-    this.isEdit= !this.isEdit
-    if(!this.isEdit){
-      const elements = document.querySelectorAll('.widget');
-      elements.forEach((element) => {
-        this.renderer.setStyle(element, 'border', 'none');
-      });
-    
+  toggleIcon() {
+    const elements = document.querySelectorAll('.widget');
+
+    if (elements.length) {
+      this.isEdit = !this.isEdit;
+      if (!this.isEdit) {
+        elements.forEach((element) => {
+          this.renderer.setStyle(element, 'border', 'none');
+        });
+      }
+    } else {
+      this.isEdit = false;
+      const nativeElement = this.widgetIcons.nativeElement;
+      this.renderer.setStyle(nativeElement, 'cursor', 'default');
     }
   }
   delete() {
-    const widgetEl = this.elementRef.nativeElement.querySelector('.widget');
-    widgetEl.remove();
+    if (this.isEdit) {
+      const widgetEl = this.elementRef.nativeElement.querySelector('.widget');
 
-    this.isEdit = false;
+      this.isEdit = true;
+      widgetEl.remove();
+    }
   }
 
   bringForward() {

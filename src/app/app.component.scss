@@ -54,11 +54,11 @@ body {
   text-transform: uppercase;
 }
 .phone-case {
-  background-image: url(../assets/images/other/iphone-backgr.png);
+  background-image: url(../assets/images/other/iphone-backgr.tiff);
   background-position: center;
   background-size: 100% 100%;
   border-radius: 32px;
-  height: 504px;
+  height: 506px;
   pointer-events: none;
   width: 258px;
 }
@@ -85,19 +85,19 @@ body {
 }
 
 .phone-fore {
-  background-image: url(../assets/images/other/iphone-foregr.png);
+  background-image: url(../assets/images/other/iphone-foregr.tiff);
 
   background-position: center;
   background-size: 100% 100%;
   border-radius: 32px;
-  height: 504px;
+  height: 506px;
   left: 50%;
   margin: 0 auto;
   pointer-events: none;
   position: absolute;
   top: 0;
   transform: translateX(-50%);
-  width: 258px;
+  width: 260px;
 }
 .card {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
